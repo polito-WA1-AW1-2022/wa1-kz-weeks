@@ -6,7 +6,7 @@ Using JavaScript objects manage a list of objects that include information about
 Each exam will contain:
 
 - Course code
-- Course ame
+- Course name
 - Credits
 - Score (number between 18 and 30, plus a Boolean for the honors)
 - Date
