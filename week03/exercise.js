@@ -44,7 +44,7 @@ function ExamList() {
 
 /* TESTING */
 const wa1 = new Exam('01TXYOV', 'Web Application I', 6, dayjs('2022-06-07'), 30, true);
-const softeng = new Exam('01xxx', 'Software Engineering I', 6, dayjs('2022-07-02'), 28);
+const softeng = new Exam('04GSPOV', 'Software Engineering I', 6, dayjs('2022-07-02'), 28);
 
 const exams = new ExamList();
 exams.add(wa1);
