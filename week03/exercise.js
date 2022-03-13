@@ -10,7 +10,7 @@ function Exam(code, name, credits, date, score, laude = false) {
   this.score = score;
   this.laude = laude;
 
-  this.toString = () => `${this.code} - ${this.name}: ${this.score}`;
+  this.toString = () => `${this.code} - ${this.name}: ${laude ? this.score + 'L' : this.score}`;
 }
 
 function ExamList() {
