@@ -43,19 +43,44 @@ function ExamList() {
     });
   };
 
-  // find
+  // find -- DEVELOPED OUTSIDE THE CLASS
   this.find = (code) => {
-    // write something clever
-  }
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM course JOIN score ON course.code=score.coursecode WHERE score.coursecode=?';
+      db.get(sql, [code], (err, row) => {
+        if (err)
+          reject(err);
+        else
+          resolve(new Exam(row.code, row.name, row.CFU, row.datepassed, row.score, (row.laude ? true : false)))
+      });
+    });
+  };
 
-  // afterDate
+  // afterDate -- DEVELOPED OUTSIDE THE CLASS
   this.afterDate = (date) => {
-    // write something clever
-  }
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT * FROM course JOIN score ON course.code=score.coursecode WHERE score.datepassed > ?' ;
+      db.all(sql, [date], (err, rows) => {
+        if(err)
+          reject(err);
+        else {
+          const exams = rows.map(row => new Exam(row.code, row.name, row.CFU, row.datepassed, row.score, (row.laude ? true : false)));
+          resolve(exams);
+        }
+      });
+    });
+  };
 
-  //getWorst
-  this.getWorst = (num) => {
-    // write something clever
+  /* afterDate -- ALTERNATIVE
+  this.afterDate = async (date) => {
+    const exams = await this.getAll();
+    return exams.filter(course => course.date.isAfter(date));
+  }; */
+
+  // getWorst -- DEVELOPED OUTSIDE THE CLASS
+  this.getWorst = async (num) => {
+    const exams = await this.getAll();
+    return exams.sort((a,b) => a.score - b.score).splice(0, num);
   };
 }
 
@@ -71,7 +96,16 @@ async function main() {
   //console.log(id);
 
   const myExams = await examDb.getAll();
-  console.log(`${myExams}`);
+  console.log(`All exams: ${myExams}`);
+
+  const found = await examDb.find('01TXYOV');
+  console.log(`01TXYOV? ${found}`);
+
+  const recentExams = await examDb.afterDate('2022-03-16');
+  console.log(`Recent exams: ${recentExams}`);
+
+  const worstTwo = await examDb.getWorst(2);
+  console.log(`Worst two exams: ${worstTwo}`);
 }
 
 main();
