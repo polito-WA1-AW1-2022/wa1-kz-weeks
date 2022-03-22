@@ -1,0 +1,12 @@
+aside, footer {
+  background-color: aliceblue;
+}
+
+.intro {
+  color:dimgray;
+  font-style: italic;
+}
+
+#bigger-margin-top {
+  margin-top: 1em;
+}
