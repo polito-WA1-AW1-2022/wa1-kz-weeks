@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import dayjs from 'dayjs';
-import ExamScores from './components/ExamComponents';
+import ExamTable from './components/ExamTable';
 import { useState } from 'react';
 
 const fakeExams = [
@@ -30,7 +30,9 @@ function App() {
         </Col>
       </Row>
       <Row>
-        <ExamScores exams={exams} deleteExam={deleteExam} addExam={addExam}></ExamScores>
+        <Col>
+          <ExamTable exams={exams} deleteExam={deleteExam} addExam={addExam}></ExamTable>
+        </Col>
       </Row>
     </Container>
   );
