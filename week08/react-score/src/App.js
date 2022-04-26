@@ -22,6 +22,17 @@ function App() {
     setExams(oldExams => [...oldExams, exam]);
   }
 
+  const updateExam = (exam) => {
+    setExams(oldExams => {
+      return oldExams.map(ex => {
+        if(exam.code === ex.code)
+          return {code: exam.code, name: exam.name, score: exam.score, date: exam.date};
+        else
+          return ex;
+      });
+    });
+  }
+
   return (
     <Container className='App'>
       <Row>
@@ -31,7 +42,7 @@ function App() {
       </Row>
       <Row>
         <Col>
-          <ExamTable exams={exams} deleteExam={deleteExam} addExam={addExam}></ExamTable>
+          <ExamTable exams={exams} deleteExam={deleteExam} addExam={addExam} editExam={updateExam}></ExamTable>
         </Col>
       </Row>
     </Container>
