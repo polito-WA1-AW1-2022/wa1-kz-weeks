@@ -37,7 +37,7 @@ function ExamForm(props) {
 
       <Form.Group className="mb-3">
         <Form.Label>Date</Form.Label>
-        <Form.Control type="date" value={date.format('YYYY-MM-DD')} onChange={event => setDate(event.target.value)}/>
+        <Form.Control type="date" value={date.format('YYYY-MM-DD')} onChange={event => setDate(dayjs(event.target.value))}/>
       </Form.Group>
 
       <Button variant="primary" type="submit">Save</Button> <Button variant="danger" onClick={props.cancel}>Cancel</Button>
