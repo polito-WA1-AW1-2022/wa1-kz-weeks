@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {Container, Row, Col} from 'react-bootstrap';
+
 import dayjs from 'dayjs';
-import ExamTable from './components/ExamTable';
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { ExamRoute, FormRoute, DefaultRoute } from './components/ExamViews';
 
 const fakeExams = [
   {code: '01TYMOV', name: 'Information systems security', score: 30, date: dayjs('2022-02-01')},
@@ -34,18 +36,13 @@ function App() {
   }
 
   return (
-    <Container className='App'>
-      <Row>
-        <Col>
-          <h1>My Exams ({exams.length})</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <ExamTable exams={exams} deleteExam={deleteExam} addExam={addExam} editExam={updateExam}></ExamTable>
-        </Col>
-      </Row>
-    </Container>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={ <ExamRoute exams={exams} deleteExam={deleteExam}/> } />
+        <Route path='*' element={ <DefaultRoute/> } />
+        <Route path="add" element={ <FormRoute addExam={addExam} /> } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

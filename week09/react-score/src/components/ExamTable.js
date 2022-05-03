@@ -1,12 +1,8 @@
-import {Table, Button} from 'react-bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { useState } from 'react';
-import ExamForm from './ExamForm';
+import { Table, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function ExamTable(props) {
-  const [showForm, setShowForm] = useState(false);
-  const [editableExam, setEditableExam] = useState();
-
   return(<>
       <Table striped>
         <thead>
@@ -20,15 +16,15 @@ function ExamTable(props) {
         </thead>
         <tbody>
           {
-            props.exams.map((ex) => <ExamRow exam={ex} key={ex.code}
-              deleteExam={props.deleteExam} setShowForm={setShowForm} setEditableExam={setEditableExam}
-            />)
+            props.exams.map((ex) => 
+              <ExamRow exam={ex} key={ex.code} deleteExam={props.deleteExam}/>)
           }
         </tbody>
       </Table>
       
-      {showForm ? <ExamForm key={editableExam ? editableExam.code : '0'} exam={editableExam} addExam={(exam) => {props.addExam(exam); setShowForm(false);}} editExam={(exam) => {props.editExam(exam); setShowForm(false);}} cancel={() => setShowForm(false)} /> :
-      <Button variant='success' onClick={() => {setShowForm(true); setEditableExam();}}>Add</Button> }
+      <Link to='/add'>
+        <Button variant='success'>Add Exam</Button>
+      </Link>
     </>
   );
 }
@@ -37,7 +33,7 @@ function ExamRow(props) {
   return(
     <tr>
       <ExamData exam={props.exam}/>
-      <ExamActions setShowForm={props.setShowForm} setEditableExam={props.setEditableExam} deleteExam={props.deleteExam} exam={props.exam}/>
+      <ExamActions exam={props.exam} deleteExam={props.deleteExam} />
     </tr>
   );
 }
@@ -54,10 +50,11 @@ function ExamData(props) {
 }
 
 function ExamActions(props) {
-  return <td>
-    <Button variant="primary" onClick={() => {props.setShowForm(true); props.setEditableExam(props.exam);}}><i className='bi bi-pencil-square'></i></Button>&nbsp;
-    <Button variant='danger' onClick={() => {props.deleteExam(props.exam.code)}}><i className='bi bi-trash3'></i></Button>
-  </td>
+  return (
+    <td>
+      <Button variant='danger' onClick={() => {props.deleteExam(props.exam.code)}}><i className='bi bi-trash3'></i></Button>
+    </td>
+  );
 }
 
 export default ExamTable;

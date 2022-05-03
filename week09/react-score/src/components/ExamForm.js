@@ -1,21 +1,25 @@
-import {Button, Form} from 'react-bootstrap';
 import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 function ExamForm(props) {
-  const [code, setCode] = useState(props.exam ? props.exam.code : '');
-  const [course, setCourse] = useState(props.exam ? props.exam.name : '');
-  const [score, setScore] = useState(props.exam ? props.exam.score : 30);
-  const [date, setDate] = useState(props.exam ? props.exam.date : dayjs());
+  const navigate = useNavigate();
+
+  const [code, setCode] = useState('');
+  const [course, setCourse] = useState('');
+  const [score, setScore] = useState(30);
+  const [date, setDate] = useState(dayjs());
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const exam = {code: code, name: course, score: score, date: dayjs(date)};
-    // VALIDATION!
-    if(props.exam === undefined)
-      props.addExam(exam);
-    else
-      props.editExam(exam);
+    
+    /* In this example data validation is executed through HTML5 validation attributes.
+       If you want to use JavaScript validations, this could be the right place for coding them! */
+
+    props.addExam(exam);
+    navigate('/');
   }
 
   return(
@@ -40,7 +44,10 @@ function ExamForm(props) {
         <Form.Control type="date" value={date.format('YYYY-MM-DD')} onChange={event => setDate(dayjs(event.target.value))}/>
       </Form.Group>
 
-      <Button variant="primary" type="submit">Save</Button> <Button variant="danger" onClick={props.cancel}>Cancel</Button>
+      <Button variant="primary" type="submit">Save</Button> &nbsp;
+      <Link to='/'>
+        <Button variant="danger">Cancel</Button>
+      </Link>
       
     </Form>
   )
