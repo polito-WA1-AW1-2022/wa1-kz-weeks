@@ -7,5 +7,5 @@ It will be developed in phases, in several weeks, to illustrate the different fe
 * _Phase 1_: just static component rendering, and props-propagation. Uses 'fake' data and does not allow any user interaction.
 * _Phase 2_: data manipulation with a form.
 * _Phase 3_: implementing routes using React Router v6.
-    *_Phase 3.1_: implementing an example of nested routing with index route.
-    *_Phase 3.2_: restoring edit exam functionality through a dynamic route.
+  * _Phase 3.1_: implementing an example of nested routing with index route.
+  * _Phase 3.2_: restoring edit exam functionality through a dynamic route.
