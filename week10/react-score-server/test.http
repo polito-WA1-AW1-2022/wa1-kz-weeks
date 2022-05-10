@@ -1,0 +1,9 @@
+PUT http://localhost:3001/api/exams/02LSEOV HTTP/1.1
+content-type: application/json
+
+{
+  "code": "02LSEOV",
+  "score": 27,
+  "laude": false,
+  "date": "2021-01-02"
+}
