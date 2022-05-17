@@ -1,20 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { ExamRoute, FormRoute, EditRoute, DefaultRoute } from './components/ExamViews';
 
-const fakeExams = [
-  {code: '01TYMOV', name: 'Information systems security', score: 30, date: dayjs('2022-02-01')},
-  {code: '01SQJOV', name: 'Data Science and Database Technology', score: 21, date: dayjs('2021-06-15')},
-  {code: '04GSPOV', name: 'Software Engineering', score: 26, date: dayjs('2022-06-04')}
-];
+import API from './API';
 
 function App() {
-  const [exams, setExams] = useState(fakeExams);
+  const [exams, setExams] = useState([]);
+
+  useEffect(() => {
+    const getExams = async() => {
+      const exams = await API.getAllExams();
+      setExams(exams);
+    };
+    getExams();
+  }, []);
 
   const deleteExam = (courseCode) => {
     setExams((exs) => exs.filter(ex => ex.code !== courseCode));
