@@ -1,0 +1,27 @@
+PUT http://localhost:3001/api/exams/02LSEOV HTTP/1.1
+content-type: application/json
+
+{
+  "code": "02LSEOV",
+  "score": 27,
+  "laude": false,
+  "date": "2021-01-02"
+}
+
+###
+POST http://localhost:3001/api/exams HTTP/1.1
+content-type: application/json
+
+{
+  "code": "04GSPOV",
+  "score": 30,
+  "laude": true,
+  "date": "2022-06-15"
+}
+
+###
+GET http://localhost:3001/api/exams HTTP/1.1
+
+###
+
+DELETE http://localhost:3001/api/exams/04GSPOV HTTP/1.1
