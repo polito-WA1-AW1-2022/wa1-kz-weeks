@@ -13,7 +13,7 @@ const port = 3001;
 // set up the middlewares
 app.use(morgan('dev'));
 app.use(express.json()); // for parsing json request body
-// set uo and enable cors
+// set up and enable cors
 const corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200
@@ -42,9 +42,9 @@ app.post('/api/exams', [
 
   try {
     await dao.addExam(req.body);
-    res.status(201).end();
+    setTimeout(()=> res.status(201).end(), 5000);
   } catch(err) {
-    res.status(503).json({error: `Database error during the creation of exam ${exam.code}.`});
+    res.status(503).json({error: `Database error during the creation of exam ${req.body.code}.`});
   }
 });
 

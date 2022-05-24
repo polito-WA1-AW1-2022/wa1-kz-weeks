@@ -11,22 +11,38 @@ import API from './API';
 function App() {
   const [exams, setExams] = useState([]);
 
+  const getExams = async() => {
+    const exams = await API.getAllExams();
+    setExams(exams);
+  };
+
   useEffect(() => {
-    const getExams = async() => {
-      const exams = await API.getAllExams();
-      setExams(exams);
-    };
     getExams();
   }, []);
 
   const deleteExam = (courseCode) => {
-    setExams((exs) => exs.filter(ex => ex.code !== courseCode));
+    setExams(oldExams => {
+      return oldExams.map(ex => {
+        if(ex.code === courseCode)
+          return {...ex, status: 'deleted'};
+        else
+          return ex;
+      });
+    });
+
+    API.deleteExam(courseCode).then(() => getExams());
+    //.catch(...)
   }
 
   const addExam = (exam) => {
+    exam.status = 'added';
     setExams(oldExams => [...oldExams, exam]);
+
+    API.addExam(exam).then(()=> getExams());
+      //.catch(...);
   }
 
+  // TO UPDATE TO WORK WITH THE SERVER
   const updateExam = (exam) => {
     setExams(oldExams => {
       return oldExams.map(ex => {
