@@ -2,6 +2,10 @@
 
 The `react-score-server-mini` in this project is a minimal server-side app companion of `react-scores-mini`. It presents one API to get a student's university exams and to perform the login/logout.
 
+The database has two users:
+* student@studenti.polito.it -> password: password
+* test@polito.it -> password: testtest
+
 ## APIs
 Hereafter, we report the HTTP APIs implemented in the project.
 

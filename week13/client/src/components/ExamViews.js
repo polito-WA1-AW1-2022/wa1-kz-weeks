@@ -1,6 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 
 import ExamTable from './ExamTable';
+import { LoginForm } from './AuthComponents';
 
 function DefaultRoute() {
   return(
@@ -32,4 +33,21 @@ function ExamRoute(props) {
   );
 }
 
-export { ExamRoute, DefaultRoute };
+function LoginRoute(props) {
+  return(
+    <>
+      <Row>
+        <Col>
+          <h1>Login</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <LoginForm login={props.login} />
+        </Col>
+      </Row>
+    </>
+  );
+}
+
+export { ExamRoute, DefaultRoute, LoginRoute };
